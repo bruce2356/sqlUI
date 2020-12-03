@@ -1,7 +1,6 @@
 <% layout('../layout') %>
 <form action="/form/query" method="POST">
   用戶電話:
-  <input name="mob" type="text"><p></p>
-  <!-- <input name="queryString2" type="text"> -->
+  <input name="mob" type="text" placeholder="請輸入手機" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="10"><p></p>
   <input type="submit" value="確定">
 </form>

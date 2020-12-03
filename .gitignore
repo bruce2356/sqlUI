@@ -1,2 +1,5 @@
 sql/config.js
 node_modules/
+
+git config --global http.proxy http://proxy-n2.taipower.com.tw:3128
+git config --global https.proxy http://proxy-n2.taipower.com.tw:3128

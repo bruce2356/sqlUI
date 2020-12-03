@@ -1,0 +1,25 @@
+2020-12-03 15:36:34--- select * from Member where Mobile = 0958518053
+2020-12-03 15:36:56--- select * from Member where Mobile = '0958518053'
+2020-12-03 15:36:56--- Mobile:0958518053, EXP:1954, GoldPoint:140050, SilverPoint:5064 updated successfully.
+
+      --------------------------------------------------------------------------------------------------------
+2020-12-03 15:37:12--- select * from Member where Mobile = 0958518053
+2020-12-03 15:37:28-----insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+                              values (8,'GodsHand', 0, 1, '20201203', '2020-12-03 15:37:28')
+2020-12-03 15:37:28-----insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+                          values (8,999,'獎勵補發通知','您的獎勵已成功補發，內容為 經驗值:1 , 銀點:0，祝您有個美好的一天，謝謝。','2020-12-03 15:37:28', 0)
+2020-12-03 15:37:28-----update Member set Exp = Exp + 1, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+2020-12-03 15:37:28--- select * from Member where Mobile = '0958518053'
+2020-12-03 15:37:28--- Mobile:0958518053, EXP:1955, GoldPoint:140050, SilverPoint:5064 updated successfully.
+
+      --------------------------------------------------------------------------------------------------------
+2020-12-03 15:37:57--- select * from Member where Mobile = 0958518053
+2020-12-03 15:38:09-----insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+                              values (8,'ElePredict', 3000, '20201203', '2020-12-03 15:38:09')
+2020-12-03 15:38:09-----insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+                              values (8,888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1606981089,"awardType":"精確獎","awardDesc":實際用電量小於預測用電量10度以內, "predictionPower":500,"actullyPower":490,"reducePower":10,"goldPoint":3000}',10 ,'2020-12-03 15:38:09', 0)
+2020-12-03 15:38:09-----update Member set GoldPoint = GoldPoint + 3000 where Mobile = '0958518053'
+2020-12-03 15:38:09--- select * from Member where Mobile = '0958518053'
+2020-12-03 15:38:09--- Mobile:0958518053, EXP:1955, GoldPoint:143050, SilverPoint:5064 updated successfully.
+
+      --------------------------------------------------------------------------------------------------------

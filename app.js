@@ -1,9 +1,10 @@
 const createError = require('http-errors')
+const fs = require('fs')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const logger = require('morgan')
+const morgan = require('morgan')
 const flash = require('connect-flash');
 // const bodyParser = require('body-parser')
 const indexRouter = require('./routes/index')
@@ -16,8 +17,8 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.engine('ejs', engine)
+app.use(morgan('dev'))
 
-app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(session({ cookie: { maxAge: 60000 }, 

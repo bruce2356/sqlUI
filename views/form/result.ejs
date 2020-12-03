@@ -1,9 +1,10 @@
 <% layout('../layout') %>
-<h1><%= mob %></h1>
+<h1><%= mobile %></h1>
 <form action="/result/add" method="POST">
-    經驗值 + <input name="addExp" type="text"><p></p>
-    銀點 + <input name="addSlv" type="text"><p></p>
-    金點 + <input name="addGld" type="text"><p></p>
+    <%= exp %>經驗值 + <input name="addExp" type="text" oninput="value=value.replace(/[^\d]/g,'')"><p></p>
+    <%= sp %>銀點 + <input name="addSlv" type="text" oninput="value=value.replace(/[^\d]/g,'')"><p></p> 
+    <%= gp %>金點<p></p>
+    預測度數：<input name="pdp" type="text" oninput="value=value.replace(/[^\d]/g,'')"><p></p>
+    實際度數：<input name="acp" type="text" oninput="value=value.replace(/[^\d]/g,'')"><p></p>
     <input type="submit" value="確定">
 </form>
-  
