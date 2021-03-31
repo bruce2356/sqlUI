@@ -10,6 +10,8 @@ const flash = require('connect-flash');
 const indexRouter = require('./routes/index')
 const formRouter = require('./routes/form')
 const resultRouter = require('./routes/result')
+const apiRouter = require('./routes/API')
+const uploadRouter = require('./routes/upload')
 const engine = require('ejs-locals')
 const app = express()
 
@@ -33,6 +35,8 @@ app.use('/', indexRouter)
 app.use('/form', formRouter)
 app.use('/result', resultRouter)
 app.use('/done', resultRouter)
+app.use('/API', apiRouter)
+app.use('/upload',uploadRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404))

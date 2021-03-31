@@ -1,25 +1,584 @@
-2020-12-03 15:36:34--- select * from Member where Mobile = 0958518053
-2020-12-03 15:36:56--- select * from Member where Mobile = '0958518053'
-2020-12-03 15:36:56--- Mobile:0958518053, EXP:1954, GoldPoint:140050, SilverPoint:5064 updated successfully.
-
-      --------------------------------------------------------------------------------------------------------
-2020-12-03 15:37:12--- select * from Member where Mobile = 0958518053
-2020-12-03 15:37:28-----insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
-                              values (8,'GodsHand', 0, 1, '20201203', '2020-12-03 15:37:28')
-2020-12-03 15:37:28-----insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
-                          values (8,999,'獎勵補發通知','您的獎勵已成功補發，內容為 經驗值:1 , 銀點:0，祝您有個美好的一天，謝謝。','2020-12-03 15:37:28', 0)
-2020-12-03 15:37:28-----update Member set Exp = Exp + 1, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
-2020-12-03 15:37:28--- select * from Member where Mobile = '0958518053'
-2020-12-03 15:37:28--- Mobile:0958518053, EXP:1955, GoldPoint:140050, SilverPoint:5064 updated successfully.
-
-      --------------------------------------------------------------------------------------------------------
-2020-12-03 15:37:57--- select * from Member where Mobile = 0958518053
-2020-12-03 15:38:09-----insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
-                              values (8,'ElePredict', 3000, '20201203', '2020-12-03 15:38:09')
-2020-12-03 15:38:09-----insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
-                              values (8,888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1606981089,"awardType":"精確獎","awardDesc":實際用電量小於預測用電量10度以內, "predictionPower":500,"actullyPower":490,"reducePower":10,"goldPoint":3000}',10 ,'2020-12-03 15:38:09', 0)
-2020-12-03 15:38:09-----update Member set GoldPoint = GoldPoint + 3000 where Mobile = '0958518053'
-2020-12-03 15:38:09--- select * from Member where Mobile = '0958518053'
-2020-12-03 15:38:09--- Mobile:0958518053, EXP:1955, GoldPoint:143050, SilverPoint:5064 updated successfully.
-
-      --------------------------------------------------------------------------------------------------------
+2021-03-31 10:47:18-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 10:47:17')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617158837,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 10:47:17', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 10:47:17')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 10:47:17', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 10:47:18-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 10:47:17')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617158837,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 10:47:17', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 10:47:17')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 10:47:17', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 10:47:18-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 10:47:17')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617158837,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 10:47:17', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 10:47:17')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 10:47:17', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 10:47:19--- RequestError: !H�ǙL
+1 'undefined'
+2021-03-31 10:47:21---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 10:52:46-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 10:52:46')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617159166,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 10:52:46', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 10:52:46')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 10:52:46', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 10:52:46-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 10:52:46')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617159166,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 10:52:46', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 10:52:46')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 10:52:46', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 10:52:46-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 10:52:46')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617159166,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 10:52:46', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 10:52:46')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 10:52:46', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 10:52:46--- RequestError: !H�ǙL
+1 'undefined'
+2021-03-31 10:52:46---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:33:28-----BEGIN TRANSACTION
+          go
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 15:33:27')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176007,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 15:33:27', 0)
+          go
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          go
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:33:27')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:33:27', 0)
+          go
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          go
+          commit
+2021-03-31 15:33:28-----BEGIN TRANSACTION
+          go
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:33:27')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176007,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:33:27', 0)
+          go
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          go
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:33:27')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:33:27', 0)
+          go
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          go
+          commit
+2021-03-31 15:33:28-----BEGIN TRANSACTION
+          go
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:33:27')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176007,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:33:27', 0)
+          go
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          go
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:33:27')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:33:27', 0)
+          go
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          go
+          commit
+2021-03-31 15:33:28--- RequestError: �� 'go' KU���
+c�
+2021-03-31 15:33:28--- RequestError: �� 'go' KU���
+c�
+2021-03-31 15:33:28--- RequestError: �� 'go' KU���
+c�
+2021-03-31 15:33:28---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:35:05-----BEGIN TRANSACTION
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:35:05')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176105,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:35:05', 0)
+          go
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          go
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:35:05')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:35:05', 0)
+          go
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          go
+          commit
+2021-03-31 15:35:05-----BEGIN TRANSACTION
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:35:05')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176105,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:35:05', 0)
+          go
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          go
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:35:05')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:35:05', 0)
+          go
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          go
+          commit
+2021-03-31 15:35:05-----BEGIN TRANSACTION
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 15:35:05')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176105,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 15:35:05', 0)
+          go
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          go
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:35:05')
+          go
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:35:05', 0)
+          go
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          go
+          commit
+2021-03-31 15:35:05--- RequestError: �� 'go' KU���
+c�
+2021-03-31 15:35:05--- RequestError: �� 'go' KU���
+c�
+2021-03-31 15:35:05--- RequestError: �� 'go' KU���
+c�
+2021-03-31 15:35:05---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:35:44-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 15:35:44')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176144,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 15:35:44', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:35:44')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:35:44', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:35:44-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:35:44')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176144,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:35:44', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:35:44')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:35:44', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:35:44-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:35:44')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176144,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:35:44', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:35:44')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:35:44', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:35:44--- RequestError: !H�ǙL
+1 'undefined'
+2021-03-31 15:35:47---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:40:09-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 15:40:09')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176409,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 15:40:09', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:40:09')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:40:09', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:40:09-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:40:09')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176409,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:40:09', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:40:09')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:40:09', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:40:09-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:40:09')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176409,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:40:09', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:40:09')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:40:09', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:40:09--- RequestError: !H�ǙL
+1 'undefined'
+2021-03-31 15:40:09---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:47:30-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:47:30')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176850,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:47:30', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:47:30')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:47:30', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:47:30-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 15:47:30')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176850,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 15:47:30', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:47:30')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:47:30', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:47:30-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:47:30')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617176850,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:47:30', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:47:30')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:47:30', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:47:30--- RequestError: !H�ǙL
+1 'undefined'
+2021-03-31 15:47:30---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:52:32-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:52:32')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177152,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:52:32', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:52:32')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:52:32', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:52:32-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:52:32')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177152,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:52:32', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:52:32')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:52:32', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:52:32-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', undefined, '20210331', '2021-03-31 15:52:32')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177152,"awardType":"undefined","awardDesc":undefined, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":undefined}',10 ,'2021-03-31 15:52:32', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + undefined where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:52:32')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:52:32', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:52:32--- RequestError: !H�ǙL
+1 'undefined'
+2021-03-31 15:52:32---File DONE --------------------------------------------------------------------------------------------------------
+2021-03-31 15:53:52-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 0, '20210331', '2021-03-31 15:53:52')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177232,"awardType":"","awardDesc":, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":0}',10 ,'2021-03-31 15:53:52', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 0 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:53:52')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:53:52', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:53:52-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 5000, '20210331', '2021-03-31 15:53:52')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177232,"awardType":"神準獎","awardDesc":實際用電量小於預測用電量5度以內, "predictionPower":100,"actullyPower":99,"reducePower":1,"goldPoint":5000}',10 ,'2021-03-31 15:53:52', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 5000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 0, 0, '20210331', '2021-03-31 15:53:52')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:0 , 銀點:0，祝您有個美好的一天，謝謝。','2021-03-31 15:53:52', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 0, SilverPoint = SilverPoint + 0 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:53:52-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 1000, '20210331', '2021-03-31 15:53:52')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177232,"awardType":"達標獎","awardDesc":實際用電量小於預測用電量20度以內, "predictionPower":101,"actullyPower":88,"reducePower":13,"goldPoint":1000}',10 ,'2021-03-31 15:53:52', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 1000 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 22, 22, '20210331', '2021-03-31 15:53:52')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:22 , 銀點:22，祝您有個美好的一天，謝謝。','2021-03-31 15:53:52', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 22, SilverPoint = SilverPoint + 22 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:53:52-----BEGIN TRANSACTION DECLARE @insPR int,@insPI int ,@upM int ,@insPR1 int,@insPI1 int ,@upM1 int ,@R int
+          insert into PointRecord (UserID,PointType,Gold,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'ElePredict', 0, '20210331', '2021-03-31 15:53:52')
+          select @insPR = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, Extra, Action, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),888,'用電量預測結果','本期的用電量預測結果出爐囉！快來看看吧','{"subject":"用電量預測結果", "timestamp":1617177232,"awardType":"","awardDesc":, "predictionPower":0,"actullyPower":0,"reducePower":0,"goldPoint":0}',10 ,'2021-03-31 15:53:52', 0)
+          select @insPI = @@ERROR
+          update Member set GoldPoint = GoldPoint + 0 where Mobile = '0958518053'
+          select @upM = @@ERROR
+          insert into PointRecord (UserID,PointType,Sliver,Exp,Date, CreateDate)
+          values ((select ID from Member where Mobile='0958518053'),'GodsHand', 44, 44, '20210331', '2021-03-31 15:53:52')
+          select @insPR1 = @@ERROR
+          insert into PushInbox(UserID, PushMissionID, Title, Msg, CreateDate, IsRead)
+          values ((select ID from Member where Mobile='0958518053'),999,'獎勵發送通知','您的獎勵已成功發送，內容為 經驗值:44 , 銀點:44，祝您有個美好的一天，謝謝。','2021-03-31 15:53:52', 0)
+          select @insPI1 = @@ERROR
+          update Member set Exp = Exp + 44, SilverPoint = SilverPoint + 44 where Mobile = '0958518053'
+          select @upM1 = @@ERROR
+          select @R = @@ROWCOUNT
+          if @insPR = 0 and @insPI = 0 and @upM = 0 and @insPR1 = 0 and @insPI1 = 0 and @upM1 = 0 and @R = 1 commit transaction
+          else rollback transaction
+2021-03-31 15:53:53---File DONE --------------------------------------------------------------------------------------------------------
